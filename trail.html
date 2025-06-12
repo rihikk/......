@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Toggle</title>
+    <style>
+        @keyframes emoji {
+            0% { transform: scale(1); }
+            50% { transform: scale(2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes drop {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .kiss {
+            height: 100px;
+            animation: emoji 3s infinite;
+        }
+
+        .smile {
+            height: 100px;
+        }
+
+        body {
+            background-color: black;
+        }
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .drop {
+            height: 40px;
+            position: absolute;
+            top: 51%;
+            left: 51%;
+            animation: drop 3s infinite;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img src="kiss-emoji-download-iphone-emojis-png-photo.png" id="emoji" class="kiss">
+        <img src="waterdrop.png" class="drop" id="drop">
+    </div>
+
+    <script>
+        let flag = true;  // toggle state
+        const emojiElement = document.getElementById('emoji');
+        const dropElement = document.getElementById('drop');
+
+        emojiElement.addEventListener('click', function () {
+            if (flag) {
+                emojiElement.src = "smile.png";
+                emojiElement.className = "smile";
+                dropElement.style.display = "block";
+            } else {
+                emojiElement.src = "kiss-emoji-download-iphone-emojis-png-photo.png";
+                emojiElement.className = "kiss";
+                dropElement.style.display = "none";
+            }
+            flag = !flag;  // toggle the state
+        });
+    </script>
+</body>
+</html>
