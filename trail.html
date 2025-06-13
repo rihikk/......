@@ -1,75 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emoji Toggle</title>
-    <style>
-        @keyframes emoji {
-            0% { transform: scale(1); }
-            50% { transform: scale(2); }
-            100% { transform: scale(1); }
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tear from Eye</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-        @keyframes drop {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(20px); }
-            100% { transform: translateY(0px); }
-        }
+    .emoji-container {
+      position: relative; /* So the tear is positioned relative to this */
+      width: 120px;
+      height: 120px;
+    }
 
-        .kiss {
-            height: 100px;
-            animation: emoji 3s infinite;
-        }
+    #emoji {
+      width: 100%;
+      height: 100%;
+      animation: emoji 3s infinite;
+      cursor: pointer;
+    }
 
-        .smile {
-            height: 100px;
-        }
+    #drop {
+      position: absolute;
+      width: 20px;
+      
+      top: 32px;    /* vertical position from top of face */
+      left: 25px;   /* horizontal position from left of face (eye spot) */
+      display: none;
+      animation: drop 1.5s infinite;
+      pointer-events: none;
+    }
 
-        body {
-            background-color: black;
-        }
+    @keyframes emoji {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
 
-        div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+    @keyframes drop {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(15px); opacity: 0.8; }
+      100% { transform: translateY(30px); opacity: 0; }
+    }
 
-        .drop {
-            height: 40px;
-            position: absolute;
-            top: 51%;
-            left: 51%;
-            animation: drop 3s infinite;
-            display: none;
-        }
-    </style>
+    @media (max-width: 600px) {
+      .emoji-container {
+        width: 90px;
+        height: 90px;
+      }
+
+      #drop {
+        width: 15px;
+        height: 15px;
+        top: 22px;
+        left: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div>
-        <img src="kiss-emoji-download-iphone-emojis-png-photo.png" id="emoji" class="kiss">
-        <img src="waterdrop.png" class="drop" id="drop">
-    </div>
+  <div class="emoji-container">
+    <img src="kiss-emoji-download-iphone-emojis-png-photo.png" id="emoji" />
+    <img src="waterdrop.png" id="drop" />
+  </div>
 
-    <script>
-        let flag = true;  // toggle state
-        const emojiElement = document.getElementById('emoji');
-        const dropElement = document.getElementById('drop');
+  <script>
+    let flag = true;
+    const emoji = document.getElementById('emoji');
+    const drop = document.getElementById('drop');
 
-        emojiElement.addEventListener('click', function () {
-            if (flag) {
-                emojiElement.src = "smile.png";
-                emojiElement.className = "smile";
-                dropElement.style.display = "block";
-            } else {
-                emojiElement.src = "kiss-emoji-download-iphone-emojis-png-photo.png";
-                emojiElement.className = "kiss";
-                dropElement.style.display = "none";
-            }
-            flag = !flag;  // toggle the state
-        });
-    </script>
+    emoji.addEventListener('click', () => {
+      if (flag) {
+        emoji.src = "smile.png";
+        drop.style.display = "block";
+      } else {
+        emoji.src = "kiss-emoji-download-iphone-emojis-png-photo.png";
+        drop.style.display = "none";
+      }
+      flag = !flag;
+    });
+  </script>
 </body>
 </html>
